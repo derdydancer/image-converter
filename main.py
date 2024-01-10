@@ -8,7 +8,14 @@ from tqdm import tqdm
 def log(string):
     with open("log.txt", 'w') as file:
         file.write(string + "\n")
-        
+
+def get_file_checksum(file_path):
+    sha256_hash = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()
+    
 def save_checksums(checksums, filename='checksums.txt'):
     with open(filename, 'w') as file:
         for path, checksum in checksums.items():
