@@ -67,7 +67,7 @@ def resize_and_compress(image_path, output_path, base_width, quality, file_name)
         # Add more formats as needed
 
         # Save the image with the specified quality and format
-        img.save(output_path + , format=output_format, quality=quality)
+        img.save(output_path, format=output_format, quality=quality)
 
 def process_directory(input_dir, output_dir, base_width, quality):
     files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
