@@ -92,7 +92,7 @@ def main():
         schedule.every(int(frequency.split()[0])).hours.do(job)
     # Add more conditions here if needed (e.g., for days, weeks)
 
-    job():
+    job()
     while True:
         schedule.run_pending()
         time.sleep(1)
