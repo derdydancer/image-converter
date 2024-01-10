@@ -8,12 +8,15 @@ if you want to build the image directly from the GitHub repository without cloni
 version: '3'
 
 services:
-  image-converter:
-    build:
-      context: https://github.com/derdydancer/image-converter.git
+  image-processor:
+    build: .
     volumes:
+      - .:/usr/src/app
       - /path/to/input_directory:/input
       - /path/to/output_directory:/output
+    environment:
+      - WIDTH=800
+      - QUALITY=85
 ```
 In this configuration, the context directive under build points to the GitHub repository URL.
 
