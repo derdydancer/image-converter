@@ -47,7 +47,7 @@ def read_previous_file_count(filename='file_count.txt'):
     except FileNotFoundError:
         return -1
         
-def resize_and_compress(image_path, output_path, base_width, quality, file_name):
+def resize_and_compress(image_path, output_path, base_width, quality):
     with Image.open(image_path) as img:
         # Calculate the height using the aspect ratio
         w_percent = (base_width / float(img.size[0]))
