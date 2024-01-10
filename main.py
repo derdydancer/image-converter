@@ -69,7 +69,7 @@ def resize_and_compress(image_path, output_path, base_width, quality):
         # Save the image with the specified quality and format
         img.save(output_path, format=output_format, quality=quality)
 
-def process_directory(input_dir, output_dir, base_width, quality):
+def process_directory(input_dir, output_dir, config_dir, base_width, quality):
     files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
     checksum_file = os.path.join(config_dir, "checksums.txt")
     processed_checksums = read_checksums(checksum_file)
@@ -98,7 +98,7 @@ def job():
     previous_file_count = read_previous_file_count(checksum_file)
 
     if current_file_count != previous_file_count:
-        process_directory(input_dir, output_dir, base_width, quality)
+        process_directory(input_dir, output_dir, config_dir, base_width, quality)
         save_file_count(current_file_count, checksum_file)
 
 def main():
