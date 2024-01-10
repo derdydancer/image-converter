@@ -93,13 +93,13 @@ def job():
     base_width = int(os.environ.get('WIDTH', 800))
     quality = int(os.environ.get('QUALITY', 85))
 
-    checksum_file = os.path.join(config_dir, "checksums.txt")
+    count_file = os.path.join(config_dir, "file_count.txt")
     current_file_count = get_file_count(input_dir)
-    previous_file_count = read_previous_file_count(checksum_file)
+    previous_file_count = read_previous_file_count(count_file)
 
     if current_file_count != previous_file_count:
         process_directory(input_dir, output_dir, config_dir, base_width, quality)
-        save_file_count(current_file_count, checksum_file)
+        save_file_count(current_file_count, count_file)
 
 def main():
     log("Starting")
