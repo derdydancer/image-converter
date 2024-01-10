@@ -18,4 +18,4 @@ ENV QUALITY=85
 EXPOSE 80
 
 # Run main.py when the container launches
-CMD ["python", "./main.py", "--width", "${WIDTH}", "--quality", "${QUALITY}"]
+CMD ["python", "./main.py", "--width"]
