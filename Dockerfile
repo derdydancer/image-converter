@@ -10,11 +10,12 @@ COPY . .
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Define environment variables for width and quality
+ENV WIDTH=800
+ENV QUALITY=85
+
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Define environment variable
-ENV NAME World
-
 # Run main.py when the container launches
-CMD ["python", "./main.py"]
+CMD ["python", "./main.py", "--width", "${WIDTH}", "--quality", "${QUALITY}"]
