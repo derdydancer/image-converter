@@ -54,7 +54,7 @@ def resize_and_compress(image_path, output_path, base_width, quality):
         h_size = int((float(img.size[1]) * float(w_percent)))
 
         # Resize the image while maintaining the aspect ratio
-        img = img.resize((base_width, h_size), Image.ANTIALIAS)
+        img = img.resize((base_width, h_size), Image.Resampling.LANCZOS)
 
         # Save the image with the specified quality
         img.save(output_path, quality=quality)
