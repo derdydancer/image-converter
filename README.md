@@ -8,10 +8,10 @@ if you want to build the image directly from the GitHub repository without cloni
 version: '3'
 
 services:
-  image-processor:
-    build: .
+  image-converter:
+    build:
+      context: https://github.com/derdydancer/image-converter.git
     volumes:
-      - .:/usr/src/app
       - /path/to/input_directory:/input
       - /path/to/output_directory:/output
     environment:
