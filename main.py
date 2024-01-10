@@ -47,7 +47,7 @@ def read_previous_file_count(filename='file_count.txt'):
     except FileNotFoundError:
         return -1
         
-def resize_and_compress(image_path, output_path, base_width, quality):
+def resize_and_compress(image_path, output_path, base_width, quality, file_name):
     with Image.open(image_path) as img:
         # Calculate the height using the aspect ratio
         w_percent = (base_width / float(img.size[0]))
@@ -67,7 +67,7 @@ def resize_and_compress(image_path, output_path, base_width, quality):
         # Add more formats as needed
 
         # Save the image with the specified quality and format
-        img.save(output_path, format=output_format, quality=quality)
+        img.save(output_path + , format=output_format, quality=quality)
 
 def process_directory(input_dir, output_dir, base_width, quality):
     files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
@@ -77,10 +77,11 @@ def process_directory(input_dir, output_dir, base_width, quality):
 
     for filename in tqdm(files, desc="Processing images"):
         file_path = os.path.join(input_dir, filename)
+        output_file_path = os.path.join(output_dir, filename)
         if os.path.isfile(file_path):
             checksum = get_file_checksum(file_path)
             if checksum not in processed_checksums.values():
-                resize_and_compress(file_path, output_dir, base_width, quality)
+                resize_and_compress(file_path, output_file_path, base_width, quality)
                 new_checksums[file_path] = checksum
 
     save_checksums(new_checksums)
