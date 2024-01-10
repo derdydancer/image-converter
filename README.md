@@ -14,6 +14,7 @@ services:
     volumes:
       - /path/to/input_directory:/input
       - /path/to/output_directory:/output
+      - /path/to/config_directory:/config
     environment:
       - WIDTH=800
       - QUALITY=85
