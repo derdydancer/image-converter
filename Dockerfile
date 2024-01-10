@@ -14,8 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV WIDTH=800
 ENV QUALITY=85
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
 # Run main.py when the container launches
-CMD ["python", "./main.py", "--width"]
+CMD ["python", "./main.py"]
