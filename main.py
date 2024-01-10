@@ -18,7 +18,7 @@ def get_file_checksum(file_path):
     return sha256_hash.hexdigest()
     
 def save_checksums(checksums, filename='checksums.txt'):
-    with open(filename, 'w') as file:
+    with open(filename, 'a') as file:
         for path, checksum in checksums.items():
             file.write(f"{path}:{checksum}\n")
 
