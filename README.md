@@ -17,6 +17,7 @@ services:
     environment:
       - WIDTH=800
       - QUALITY=85
+      - FREQUENCY=1 hour #example: 15 minute, 25 hour
 ```
 In this configuration, the context directive under build points to the GitHub repository URL.
 
