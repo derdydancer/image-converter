@@ -5,6 +5,10 @@ import time
 from PIL import Image
 from tqdm import tqdm
 
+def log(string):
+    with open("log.txt", 'w') as file:
+        file.write(string + "\n")
+        
 def save_checksums(checksums, filename='checksums.txt'):
     with open(filename, 'w') as file:
         for path, checksum in checksums.items():
@@ -77,8 +81,7 @@ def job():
         save_file_count(current_file_count)
 
 def main():
-    with open("log.txt", 'w') as file:
-        file.write("Starting...")
+    log("Starting")
     # Read frequency from environment variable, default to 1 hour if not set
     frequency = os.environ.get('FREQUENCY', '1 hour')
 
@@ -89,6 +92,7 @@ def main():
         schedule.every(int(frequency.split()[0])).hours.do(job)
     # Add more conditions here if needed (e.g., for days, weeks)
 
+    job():
     while True:
         schedule.run_pending()
         time.sleep(1)
