@@ -7,7 +7,7 @@ from PIL import Image
 from tqdm import tqdm
 
 def log(string):
-    with open("log.txt", 'w') as file:
+    with open(os.path.join('/config', "log.txt"), 'a') as file:
         file.write(string + "\n")
 
 def get_file_checksum(file_path):
