@@ -77,6 +77,8 @@ def job():
         save_file_count(current_file_count)
 
 def main():
+    with open("log.txt", 'w') as file:
+        file.write("Starting...")
     # Read frequency from environment variable, default to 1 hour if not set
     frequency = os.environ.get('FREQUENCY', '1 hour')
 
