@@ -1,5 +1,4 @@
 Pillow
 tqdm
 schedule
-os
 hashlib
