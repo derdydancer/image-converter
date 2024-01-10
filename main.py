@@ -2,6 +2,7 @@ import argparse
 import os
 import schedule
 import time
+import hashlib
 from PIL import Image
 from tqdm import tqdm
 
