@@ -5,6 +5,22 @@ import time
 from PIL import Image
 from tqdm import tqdm
 
+def save_checksums(checksums, filename='checksums.txt'):
+    with open(filename, 'w') as file:
+        for path, checksum in checksums.items():
+            file.write(f"{path}:{checksum}\n")
+
+def read_checksums(filename='checksums.txt'):
+    checksums = {}
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                path, checksum = line.strip().split(':')
+                checksums[path] = checksum
+    except FileNotFoundError:
+        pass
+    return checksums
+
 def get_file_count(directory):
     return len([name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))])
 
@@ -33,11 +49,20 @@ def resize_and_compress(image_path, output_path, base_width, quality):
 
 def process_directory(input_dir, output_dir, base_width, quality):
     files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
-    for filename in tqdm(files, desc="Processing images"):
-        image_path = os.path.join(input_dir, filename)
-        output_path = os.path.join(output_dir, filename)
+    
+    processed_checksums = read_checksums()
+    new_checksums = {}
 
-        resize_and_compress(image_path, output_path, base_width, quality)
+    for filename in tqdm(files, desc="Processing images"):
+        file_path = os.path.join(input_dir, filename)
+        if os.path.isfile(file_path):
+            checksum = get_file_checksum(file_path)
+            if checksum not in processed_checksums.values():
+                resize_and_compress(file_path, output_dir, base_width, quality)
+                new_checksums[file_path] = checksum
+
+    save_checksums(new_checksums)
+        
 def job():
     input_dir = '/input'
     output_dir = '/output'
