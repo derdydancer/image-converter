@@ -22,17 +22,14 @@ def process_directory(input_dir, output_dir, base_width, quality):
         output_path = os.path.join(output_dir, filename)
 
         resize_and_compress(image_path, output_path, base_width, quality)
-
+    
 def main():
-    parser = argparse.ArgumentParser(description='Resize and compress images in a directory.')
-    parser.add_argument('input_dir', type=str, help='Directory containing the original images')
-    parser.add_argument('output_dir', type=str, help='Directory to save the resized images')
-    parser.add_argument('--width', type=int, default=800, help='Base width of the resized images')
-    parser.add_argument('--quality', type=int, default=85, help='Quality of the resized images')
+    input_dir = '/input'
+    output_dir = '/output'
+    base_width = int(os.environ.get('WIDTH', 800))
+    quality = int(os.environ.get('QUALITY', 85))
 
-    args = parser.parse_args()
-
-    process_directory(args.input_dir, args.output_dir, args.width, args.quality)
+    process_directory(input_dir, output_dir, base_width, quality)
 
 if __name__ == "__main__":
     main()
