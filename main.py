@@ -56,8 +56,18 @@ def resize_and_compress(image_path, output_path, base_width, quality):
         # Resize the image while maintaining the aspect ratio
         img = img.resize((base_width, h_size), Image.Resampling.LANCZOS)
 
-        # Save the image with the specified quality
-        img.save(output_path, quality=quality)
+        # Determine the format based on the output file extension
+        output_format = 'JPEG'  # Default to JPEG
+        if output_path.lower().endswith('.png'):
+            output_format = 'PNG'
+        elif output_path.lower().endswith('.bmp'):
+            output_format = 'BMP'
+        elif output_path.lower().endswith('.gif'):
+            output_format = 'GIF'
+        # Add more formats as needed
+
+        # Save the image with the specified quality and format
+        img.save(output_path, format=output_format, quality=quality)
 
 def process_directory(input_dir, output_dir, base_width, quality):
     files = [f for f in os.listdir(input_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
